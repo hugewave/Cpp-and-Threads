@@ -25,3 +25,5 @@ foreach(file_in_test_files ${test_files})
     get_filename_component(name ${file_in_test_files} NAME_WE)
     add_executable(${name} ${file_in_test_files})
 endforeach(file_in_test_files)
+
+add_executable(test_threadpool threadpool_example.cpp ThreadPool.h)
