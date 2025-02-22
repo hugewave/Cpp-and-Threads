@@ -20,6 +20,7 @@ thread_management.cpp
 time_constrain.cpp
 unique_lock_lazy_initialization.cpp
 operator_override.cpp
+pin_thread_to_core.cpp
 )
 
 foreach(file_in_test_files ${test_files})
