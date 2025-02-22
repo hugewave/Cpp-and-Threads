@@ -1,6 +1,10 @@
 #include <future>
 #include <thread>
 #include <iostream>
+#include <array>
+#include <vector>
+#include <ctime>
+#include <Windows.h>
 
 int		factorial(int n)
 {
@@ -13,7 +17,7 @@ int		factorial(int n)
 
 }	
 
-int		factorial2(std::future<int> &f)
+int		factorial2(std::future<int>& f)
 {
 	int res;
 	int	n;
@@ -28,10 +32,23 @@ int		factorial2(std::future<int> &f)
 	for (int i = 1; i <= n; i++)
 		res *= i;
 	return (res);
-}
+};
 
 int main()
 {
+	size_t len = 1000000000;
+	DWORD t1 = GetTickCount();
+	//std::array<int, 100> a_a;
+	int* a_a = new int[len];
+	memset(a_a, 0, len * sizeof(int));
+	DWORD t2 = GetTickCount();
+	std::cout << "ARRAY" << t2 - t1 << std::endl;
+	
+	t1 = GetTickCount();
+	std::vector<int> vv(len);
+	t2 = GetTickCount();
+	std::cout << "vec" << t2 - t1 << std::endl;
+	
 	std::future<int>	thread_result;
 
 	/*
