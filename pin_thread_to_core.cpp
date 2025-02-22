@@ -18,9 +18,10 @@ int main() {
         std::cout << "Unable to determine the number of CPU cores." << std::endl;
     }
 
-    SYSTEM_INFO sysInfo;
-    GetSystemInfo(&sysInfo);
-    std::cout << "Number of CPU cores: " << sysInfo.dwNumberOfProcessors << std::endl;
+    // Get the number of CPU cores on windows
+    //SYSTEM_INFO sysInfo;
+    //GetSystemInfo(&sysInfo);
+    //std::cout << "Number of CPU cores: " << sysInfo.dwNumberOfProcessors << std::endl;
 
     // Create the thread
     HANDLE hThread = CreateThread(
@@ -39,6 +40,10 @@ int main() {
     }
 
     // Set thread affinity to CPU core 0
+    //00000001 - Core 0
+    //00000010 - Core 1
+    //00000100 - Core 2
+    //00000011 - Core 1 and 0
     DWORD_PTR affinityMask = 1; // Core 0
     if (SetThreadAffinityMask(hThread, affinityMask) == 0) {
         std::cerr << "Failed to set thread affinity. Error: " << GetLastError() << std::endl;
